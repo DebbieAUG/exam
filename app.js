@@ -17,37 +17,88 @@ const EXAM_ID = "ai-fundamentals";
 const DURATION_MINUTES = 60;
 
 window.startExam = async function () {
-  const name = document.getElementById("name").value.trim();
-  const roll = document.getElementById("roll").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const roll = document.getElementById("roll").value.trim();
 
-  if (!name || !roll) {
-    alert("Enter name and roll number");
-    return;
-  }
+    if (!name || !roll) {
+        alert("Enter name and roll number");
+        return;
+    }
 
-  const attemptId = `${EXAM_ID}_${roll}`;
-  const ref = doc(db, "attempts", attemptId);
+    const attemptId = `${EXAM_ID}_${roll}`;
+    const ref = doc(db, "attempts", attemptId);
 
-  const snap = await getDoc(ref);
+    const snap = await getDoc(ref);
 
-  if (snap.exists()) {
+    if (snap.exists()) {
+    const data = snap.data();
+
+    if (data.status !== "IN_PROGRESS") {
+        alert("Exam already submitted.");
+        return;
+    }
+
     alert("Resuming existing attempt");
-    console.log(snap.data());
+    startTimer(data, ref);
     return;
-  }
+    }
 
-  await setDoc(ref, {
-    examId: EXAM_ID,
-    rollNumber: roll,
-    name: name,
-    status: "IN_PROGRESS",
-    startTime: serverTimestamp(),
-    submitTime: null,
-    durationMinutes: DURATION_MINUTES,
-    score: null,
-    violations: 0,
-    createdAt: serverTimestamp()
-  });
+    await setDoc(ref, {
+        examId: EXAM_ID,
+        rollNumber: roll,
+        name: name,
+        status: "IN_PROGRESS",
+        startTime: serverTimestamp(),
+        submitTime: null,
+        durationMinutes: DURATION_MINUTES,
+        score: null,
+        violations: 0,
+        createdAt: serverTimestamp()
+    });
 
-  alert("Attempt created. Exam started.");
+    const newSnap = await getDoc(ref);
+    startTimer(newSnap.data(), ref);
+
+
+    alert("Attempt created. Exam started.");
 };
+
+import { updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+let timerInterval = null;
+
+function startTimer(attemptData, attemptRef) {
+  const startTime = attemptData.startTime.toDate();
+  const durationMs = attemptData.durationMinutes * 60 * 1000;
+  const endTime = startTime.getTime() + durationMs;
+
+  timerInterval = setInterval(async () => {
+    const now = Date.now();
+    const remaining = endTime - now;
+
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById("timer").innerText = "Time up! Submitting...";
+      await autoSubmit(attemptRef);
+      return;
+    }
+
+    const mins = Math.floor(remaining / 60000);
+    const secs = Math.floor((remaining % 60000) / 1000);
+
+    document.getElementById("timer").innerText =
+      `Time left: ${mins}:${secs.toString().padStart(2, "0")}`;
+  }, 1000);
+}
+
+async function autoSubmit(attemptRef) {
+  try {
+    await updateDoc(attemptRef, {
+      status: "SUBMITTED",
+      submitTime: new Date()
+    });
+    alert("Exam submitted automatically.");
+  } catch (e) {
+    console.error("Auto-submit failed:", e);
+  }
+}
