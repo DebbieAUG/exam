@@ -1,3 +1,5 @@
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -61,6 +63,7 @@ window.startExam = async function () {
 
 
     alert("Attempt created. Exam started.");
+    attachAntiCheat(attemptId);
 };
 
 import { updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -101,4 +104,49 @@ async function autoSubmit(attemptRef) {
   } catch (e) {
     console.error("Auto-submit failed:", e);
   }
+}
+
+function logEvent(attemptId, type, meta = {}) {
+  const ref = collection(db, "events");
+  addDoc(ref, {
+    attemptId,
+    type,
+    timestamp: new Date(),
+    meta
+  }).catch(() => {});
+}
+
+function attachAntiCheat(attemptId) {
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      logEvent(attemptId, "TAB_SWITCH");
+    }
+  });
+
+  window.addEventListener("blur", () => {
+    logEvent(attemptId, "WINDOW_BLUR");
+  });
+
+  window.addEventListener("focus", () => {
+    logEvent(attemptId, "WINDOW_FOCUS");
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+      logEvent(attemptId, "FULLSCREEN_EXIT");
+    }
+  });
+
+  document.addEventListener("copy", () => {
+    logEvent(attemptId, "COPY_ATTEMPT");
+  });
+
+  document.addEventListener("paste", () => {
+    logEvent(attemptId, "PASTE_ATTEMPT");
+  });
+
+  window.addEventListener("beforeunload", () => {
+    logEvent(attemptId, "REFRESH");
+  });
 }
