@@ -72,7 +72,7 @@ let timerInterval = null;
 
 function startTimer(attemptData, attemptRef) {
   const startTime = attemptData.startTime.toDate();
-  const durationMs = attemptData.durationMinutes * 60 * 1000;
+  const durationMs = attemptData.durationMinutes * 2 * 1000;
   const endTime = startTime.getTime() + durationMs;
 
   timerInterval = setInterval(async () => {
