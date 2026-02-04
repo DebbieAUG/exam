@@ -1,18 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Exam Start</title>
+  <meta charset="UTF-8" />
+  <title>Online Exam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
 
-  <h2>Start Exam</h2>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center">
 
-  <input id="name" placeholder="Name" />
-  <input id="roll" placeholder="Roll Number" />
-  <button onclick="startExam()">Start</button>
-  <div id="timer" style="font-size:20px; margin-top:20px;"></div>
+  <!-- Fullscreen Warning -->
+  <div
+    id="fullscreen-warning"
+    onclick="requestFullscreen()"
+    class="hidden w-full bg-red-100 text-red-800 text-center py-2 font-semibold cursor-pointer">
+    ⚠️ You exited fullscreen. Click here to return to fullscreen.
+  </div>
 
+  <!-- Main Container -->
+  <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg mt-8 p-6">
 
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-bold text-gray-800">
+        Certification Exam
+      </h1>
+      <div
+        id="timer"
+        class="text-lg font-semibold text-red-600">
+        Time left: --
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="mb-6" />
+
+    <!-- Start Exam Section -->
+    <div id="start-section" class="space-y-4">
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">
+          Full Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Enter your full name"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">
+          Roll Number
+        </label>
+        <input
+          id="roll"
+          type="text"
+          placeholder="Enter your roll number"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" />
+      </div>
+
+      <button
+        onclick="startExam()"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition">
+        Start Exam
+      </button>
+
+      <p class="text-sm text-gray-500 text-center mt-2">
+        This exam must be taken in fullscreen mode.  
+        You have only one attempt.
+      </p>
+    </div>
+
+    <!-- Question Section -->
+    <div id="question-section" class="hidden">
+
+      <!-- Question Box -->
+      <div
+        id="question-box"
+        class="text-gray-800 text-lg leading-relaxed mb-6">
+        <!-- Question injected here -->
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex justify-between">
+        <button
+          onclick="prevQuestion()"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md transition">
+          ← Previous
+        </button>
+
+        <button
+          onclick="nextQuestion()"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+          Next →
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- App Script -->
   <script type="module" src="app.js"></script>
+
 </body>
 </html>
