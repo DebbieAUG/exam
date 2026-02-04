@@ -20,7 +20,12 @@ import {
 // Firebase config (PASTE YOURS)
 // ===============================
 const firebaseConfig = {
-  // 🔴 PASTE YOUR CONFIG HERE
+    apiKey: "AIzaSyCw4Vx2RVrUM8JxwycjyRzOEerDOSb7LnE",
+    authDomain: "academy-exams.firebaseapp.com",
+    projectId: "academy-exams",
+    storageBucket: "academy-exams.firebasestorage.app",
+    messagingSenderId: "713843455021",
+    appId: "1:713843455021:web:af094b4d5822187dc1b4a4"
 };
 
 const app = initializeApp(firebaseConfig);
