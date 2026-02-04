@@ -149,12 +149,12 @@ window.startExam = async function () {
     return;
   }
 
+  document.getElementById("start-section").classList.add("hidden");
+  document.getElementById("question-section").classList.remove("hidden");  
+
   const attemptId = `${EXAM_ID}_${roll}`;
   const attemptRef = doc(db, "attempts", attemptId);
   const snap = await getDoc(attemptRef);
-
-  document.getElementById("start-section").classList.add("hidden");
-  document.getElementById("question-section").classList.remove("hidden");
 
 
   ALL_QUESTIONS = await loadQuestions();
