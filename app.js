@@ -35,7 +35,7 @@ const db = getFirestore(app);
 // Exam constants
 // ===============================
 const EXAM_ID = "az-900";
-const DURATION_MINUTES = 60;
+const DURATION_MINUTES = 30;
 
 let timerInterval = null;
 let currentAttemptRef = null;
@@ -314,7 +314,7 @@ function renderQuestion() {
                name="option"
                ${checked}
                onchange="selectAnswer('${qId}','${key}')">
-        ${key}. ${value}
+        ${value}
       </label><br/>
     `;
   }
@@ -336,6 +336,36 @@ window.selectAnswer = async function (qId, option) {
     await updateDoc(currentAttemptRef, updateObj);
   } catch (e) {
     console.error('Failed to save answer', e);
+  }
+};
+
+// ===============================
+// Manual Submit
+// ===============================
+window.submitExam = async function () {
+  if (!currentAttemptData) {
+    alert('Exam not initialized. Please start the exam first.');
+    return;
+  }
+
+  const confirmed = confirm('Are you sure you want to submit the exam? You cannot change your answers after submission.');
+  if (!confirmed) return;
+
+  try {
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('timer').innerText = 'Submitting...';
+    
+    await updateDoc(currentAttemptRef, {
+      status: "SUBMITTED",
+      submitTime: serverTimestamp()
+    });
+    
+    document.getElementById('question-section').classList.add('hidden');
+    document.getElementById('question-box').innerHTML = `<h2>Exam submitted successfully. Awaiting scoring.</h2>`;
+    document.getElementById('question-section').classList.remove('hidden');
+  } catch (e) {
+    console.error('Failed to submit exam', e);
+    alert('Failed to submit exam. Please try again.');
   }
 };
 
