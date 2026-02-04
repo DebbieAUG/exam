@@ -70,6 +70,13 @@ window.startExam = async function () {
     return;
   }
 
+  if (data.status === "SUBMITTED" && data.score !== null) {
+    document.getElementById("question-box").innerHTML =
+      `<h2>Your Score: ${data.score}%</h2>`;
+    return;
+  }
+
+
   // ===============================
   // CREATE NEW ATTEMPT
   // ===============================

@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ================================
+    // ATTEMPTS COLLECTION
+    // ================================
+    match /attempts/{attemptId} {
+
+      // CREATE: allowed only if doc does not exist
+      allow create: if
+        !exists(/databases/$(database)/documents/attempts/$(attemptId))
+        && request.resource.data.status == "IN_PROGRESS"
+        && request.resource.data.startTime is timestamp
+        && request.resource.data.submitTime == null
+        && request.resource.data.score == null;
+
+      // READ: allowed (students must be able to resume)
+      allow read: if true;
+
+      // UPDATE: extremely restricted
+      allow update: if
+        resource.data.status == "IN_PROGRESS"
+        && request.resource.data.status in ["IN_PROGRESS", "SUBMITTED"]
+        && request.resource.data.startTime == resource.data.startTime
+        && request.resource.data.score == null
+        && resource.data.score == null;
+
+      // DELETE: never allowed
+      allow delete: if false;
+    }
+
+    // ================================
+    // EVENTS COLLECTION (anti-cheat logs)
+    // ================================
+    match /events/{eventId} {
+      allow create: if true;
+      allow read: if false;
+      allow update, delete: if false;
+    }
+
+    // ================================
+    // EVERYTHING ELSE
+    // ================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

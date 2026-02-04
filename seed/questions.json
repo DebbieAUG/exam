@@ -1,0 +1,245 @@
+{
+  "questions": {
+    "az900_q1": {
+      "examId": "az-900",
+      "questionId": "q1",
+      "text": "A startup wants to deploy applications quickly without managing physical servers and scale based on demand. What best defines cloud computing in this scenario?",
+      "options": {
+        "A": "Purchasing hardware for long-term use",
+        "B": "Hosting applications on local servers",
+        "C": "Delivering computing services over the internet on demand",
+        "D": "Installing software on individual devices"
+      },
+      "order": 1
+    },
+    "az900_q2": {
+      "examId": "az-900",
+      "questionId": "q2",
+      "text": "According to the shared responsibility model, which task is always the responsibility of the cloud customer?",
+      "options": {
+        "A": "Physical datacenter security",
+        "B": "Hardware maintenance",
+        "C": "Identity and access management",
+        "D": "Network availability"
+      },
+      "order": 2
+    },
+    "az900_q3": {
+      "examId": "az-900",
+      "questionId": "q3",
+      "text": "Which cloud deployment model combines on-premises infrastructure with public cloud services?",
+      "options": {
+        "A": "Public cloud",
+        "B": "Private cloud",
+        "C": "Hybrid cloud",
+        "D": "Community cloud"
+      },
+      "order": 3
+    },
+    "az900_q4": {
+      "examId": "az-900",
+      "questionId": "q4",
+      "text": "An organization requires full control over infrastructure due to strict compliance regulations. Which cloud model is most appropriate?",
+      "options": {
+        "A": "Public cloud",
+        "B": "Hybrid cloud",
+        "C": "Multi-cloud",
+        "D": "Private cloud"
+      },
+      "order": 4
+    },
+    "az900_q5": {
+      "examId": "az-900",
+      "questionId": "q5",
+      "text": "Which pricing model allows customers to pay only for the resources they consume?",
+      "options": {
+        "A": "Reserved pricing",
+        "B": "Consumption-based pricing",
+        "C": "Capital expenditure",
+        "D": "Fixed subscription pricing"
+      },
+      "order": 5
+    },
+    "az900_q6": {
+      "examId": "az-900",
+      "questionId": "q6",
+      "text": "Which benefit of cloud computing ensures applications remain available during failures?",
+      "options": {
+        "A": "Scalability",
+        "B": "Elasticity",
+        "C": "High availability",
+        "D": "Manageability"
+      },
+      "order": 6
+    },
+    "az900_q7": {
+      "examId": "az-900",
+      "questionId": "q7",
+      "text": "What cloud benefit allows organizations to forecast performance and costs using SLAs and pricing tools?",
+      "options": {
+        "A": "Security",
+        "B": "Governance",
+        "C": "Reliability and predictability",
+        "D": "Scalability"
+      },
+      "order": 7
+    },
+    "az900_q8": {
+      "examId": "az-900",
+      "questionId": "q8",
+      "text": "Which cloud benefit enables centralized monitoring and automated resource management?",
+      "options": {
+        "A": "Manageability",
+        "B": "High availability",
+        "C": "Elasticity",
+        "D": "Reliability"
+      },
+      "order": 8
+    },
+    "az900_q9": {
+      "examId": "az-900",
+      "questionId": "q9",
+      "text": "Which cloud service type provides the greatest level of control over the operating system?",
+      "options": {
+        "A": "SaaS",
+        "B": "PaaS",
+        "C": "Serverless",
+        "D": "IaaS"
+      },
+      "order": 9
+    },
+    "az900_q10": {
+      "examId": "az-900",
+      "questionId": "q10",
+      "text": "Which cloud service type allows developers to focus on application code without managing infrastructure?",
+      "options": {
+        "A": "IaaS",
+        "B": "PaaS",
+        "C": "SaaS",
+        "D": "Bare metal"
+      },
+      "order": 10
+    },
+
+    "az900_q11": {
+      "examId": "az-900",
+      "questionId": "q11",
+      "text": "Which cloud service type delivers fully managed applications to end users?",
+      "options": {
+        "A": "IaaS",
+        "B": "PaaS",
+        "C": "SaaS",
+        "D": "Containers as a Service"
+      },
+      "order": 11
+    },
+    "az900_q12": {
+      "examId": "az-900",
+      "questionId": "q12",
+      "text": "A company runs workloads only during business hours. Which cloud pricing benefit helps reduce costs?",
+      "options": {
+        "A": "Reserved instances",
+        "B": "Consumption-based pricing",
+        "C": "Capital expenditure",
+        "D": "Fixed pricing"
+      },
+      "order": 12
+    },
+    "az900_q13": {
+      "examId": "az-900",
+      "questionId": "q13",
+      "text": "Which scenario best represents a serverless computing model?",
+      "options": {
+        "A": "Managing virtual machines manually",
+        "B": "Deploying code triggered by events without provisioning servers",
+        "C": "Running applications on dedicated hardware",
+        "D": "Using a fully managed email service"
+      },
+      "order": 13
+    },
+    "az900_q14": {
+      "examId": "az-900",
+      "questionId": "q14",
+      "text": "Which benefit of cloud computing helps enforce policies and compliance standards?",
+      "options": {
+        "A": "Scalability",
+        "B": "Reliability",
+        "C": "Security and governance",
+        "D": "Elasticity"
+      },
+      "order": 14
+    },
+    "az900_q15": {
+      "examId": "az-900",
+      "questionId": "q15",
+      "text": "Which scenario is best suited for IaaS?",
+      "options": {
+        "A": "Using CRM software via a browser",
+        "B": "Deploying a web app without managing servers",
+        "C": "Migrating a legacy application requiring OS control",
+        "D": "Running event-driven functions"
+      },
+      "order": 15
+    },
+    "az900_q16": {
+      "examId": "az-900",
+      "questionId": "q16",
+      "text": "Which scenario best fits PaaS?",
+      "options": {
+        "A": "Hosting virtual machines",
+        "B": "Using email services",
+        "C": "Deploying an application without managing the OS",
+        "D": "Managing physical servers"
+      },
+      "order": 16
+    },
+    "az900_q17": {
+      "examId": "az-900",
+      "questionId": "q17",
+      "text": "Which scenario best fits SaaS?",
+      "options": {
+        "A": "Configuring virtual networks",
+        "B": "Managing container clusters",
+        "C": "Using office productivity tools online",
+        "D": "Installing custom operating systems"
+      },
+      "order": 17
+    },
+    "az900_q18": {
+      "examId": "az-900",
+      "questionId": "q18",
+      "text": "Which cloud benefit reduces the risk of over-provisioning resources?",
+      "options": {
+        "A": "High availability",
+        "B": "Security",
+        "C": "Scalability and elasticity",
+        "D": "Governance"
+      },
+      "order": 18
+    },
+    "az900_q19": {
+      "examId": "az-900",
+      "questionId": "q19",
+      "text": "Which expense model is primarily associated with cloud computing?",
+      "options": {
+        "A": "Capital expenditure",
+        "B": "Operational expenditure",
+        "C": "Deferred expenditure",
+        "D": "Fixed expenditure"
+      },
+      "order": 19
+    },
+    "az900_q20": {
+      "examId": "az-900",
+      "questionId": "q20",
+      "text": "Which statement best summarizes cloud computing?",
+      "options": {
+        "A": "A replacement for all on-premises systems",
+        "B": "A single deployment architecture",
+        "C": "A model for delivering IT resources on demand with shared responsibility",
+        "D": "A hosting platform only"
+      },
+      "order": 20
+    }
+  }
+}
